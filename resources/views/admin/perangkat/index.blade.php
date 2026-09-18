@@ -51,17 +51,17 @@
                             </span>
                         </td>
                         <td class="px-3.5 py-3 text-right">
-                            <div class="inline-flex items-center gap-2">
-                                <a href="{{ route('admin.perangkat.show', $p->id) }}" class="p-2 rounded bg-green-50 text-green-600 hover:bg-green-100 transition" title="Lihat Detail">
+                            <div class="flex items-center justify-end gap-3">
+                                <a href="{{ route('admin.perangkat.show', $p->id) }}" class="btn-action-view" title="Lihat Detail">
                                     <i data-lucide="eye" class="size-4"></i>
                                 </a>
-                                <a href="{{ route('admin.perangkat.edit', $p->id) }}" class="p-2 rounded bg-blue-50 text-blue-600 hover:bg-blue-100 transition" title="Edit">
+                                <a href="{{ route('admin.perangkat.edit', $p->id) }}" class="btn-action-edit" title="Edit">
                                     <i data-lucide="edit" class="size-4"></i>
                                 </a>
-                                <form action="{{ route('admin.perangkat.destroy', $p->id) }}" method="POST" class="inline" onsubmit="return confirm('Hapus perangkat desa ini?')">
+                                <form action="{{ route('admin.perangkat.destroy', $p->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus perangkat desa ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="p-2 rounded bg-red-50 text-red-600 hover:bg-red-100 transition" title="Hapus">
+                                    <button type="submit" class="btn-action-delete" title="Hapus">
                                         <i data-lucide="trash-2" class="size-4"></i>
                                     </button>
                                 </form>

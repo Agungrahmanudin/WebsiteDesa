@@ -50,13 +50,15 @@
                         </a>
                     </div>
                 @endif
-                <div class="file-upload-box">
-                    <label class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-md bg-custom-500 hover:bg-custom-600 text-white text-xs font-semibold cursor-pointer transition shrink-0 shadow-sm">
-                        <i data-lucide="upload" class="size-3.5"></i>
-                        <span>Pilih File</span>
-                        <input type="file" name="format_file" accept=".pdf,.doc,.docx" class="hidden" onchange="handleFileChange(this)">
+                <div class="relative">
+                    <input type="file" name="format_file" id="format_file_edit" class="hidden" accept=".pdf,.doc,.docx" onchange="updateFileName(this, 'format-edit-label')">
+                    <label for="format_file_edit" class="flex items-center justify-center w-full px-4 py-3 text-xs border-2 border-dashed rounded-lg cursor-pointer border-slate-300 dark:border-zink-500 hover:border-custom-500 dark:hover:border-custom-500 bg-white dark:bg-zink-700 hover:bg-slate-50 dark:hover:bg-zink-600 transition-all">
+                        <div class="text-center">
+                            <i data-lucide="upload-cloud" class="inline-block size-4 text-slate-400 dark:text-zink-300 mb-1"></i>
+                            <p class="text-slate-600 dark:text-zink-200 font-medium text-[11px]" id="format-edit-label">Pilih file atau drag & drop di sini</p>
+                            <span class="text-[10px] text-slate-400 block mt-0.5">PDF, DOC, DOCX (Maks 5MB)</span>
+                        </div>
                     </label>
-                    <span class="file-name-text text-xs text-slate-400 ml-3 truncate">Belum ada file dipilih</span>
                 </div>
                 <p class="text-[11px] text-slate-400 mt-1">Kosongkan jika tidak ingin mengubah file blangko.</p>
             </div>
@@ -70,4 +72,15 @@
         </div>
     </form>
 </div>
+
+<script>
+function updateFileName(input, labelId) {
+    const label = document.getElementById(labelId);
+    if (input.files && input.files[0]) {
+        label.textContent = input.files[0].name;
+    } else {
+        label.textContent = 'Pilih file atau drag & drop di sini';
+    }
+}
+</script>
 @endsection

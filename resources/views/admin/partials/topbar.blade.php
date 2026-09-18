@@ -28,7 +28,7 @@
                             </div>
                             <div class="hidden text-start md:block">
                                 <h6 class="mb-0 text-sm font-medium text-slate-700 dark:text-zink-100">{{ auth()->user()->name ?? 'Administrator' }}</h6>
-                                <p class="mb-0 text-xs text-slate-400 dark:text-zink-300">{{ auth()->user()->email ?? 'admin@desacimeong.id' }}</p>
+                                <p class="mb-0 text-xs text-slate-400 dark:text-zink-300">{{ auth()->user()->email ?? ($kontakDesa->email ?? 'admin@desa.id') }}</p>
                             </div>
                             <i data-lucide="chevron-down" class="size-4 text-slate-400 hidden md:block"></i>
                         </button>

@@ -48,7 +48,16 @@
                     </div>
                     <div>
                         <label class="block text-xs font-semibold text-slate-600 dark:text-zink-200 mb-1.5">Lampiran Gambar</label>
-                        <input type="file" name="gambar" class="w-full text-xs px-3 py-1.5 border rounded-lg border-slate-200 dark:border-zink-500 dark:bg-zink-700 focus:outline-none focus:border-custom-500 file:mr-2 file:py-1 file:px-2.5 file:rounded file:border-0 file:text-xs file:bg-custom-500 file:text-white" accept="image/*">
+                        <div class="relative">
+                            <input type="file" name="gambar" id="gambar_pengumuman" class="hidden" accept="image/*" onchange="updateFileName(this, 'gambar-label')">
+                            <label for="gambar_pengumuman" class="flex items-center justify-center w-full px-4 py-3 text-xs border-2 border-dashed rounded-lg cursor-pointer border-slate-300 dark:border-zink-500 hover:border-custom-500 dark:hover:border-custom-500 bg-white dark:bg-zink-700 hover:bg-slate-50 dark:hover:bg-zink-600 transition-all">
+                                <div class="text-center">
+                                    <i data-lucide="upload-cloud" class="inline-block size-4 text-slate-400 dark:text-zink-300 mb-1"></i>
+                                    <p class="text-slate-600 dark:text-zink-200 font-medium text-[11px]" id="gambar-label">Pilih foto atau drag & drop di sini</p>
+                                    <span class="text-[10px] text-slate-400 block mt-0.5">JPG, PNG, WEBP (Maks 20MB)</span>
+                                </div>
+                            </label>
+                        </div>
                     </div>
                     <button type="submit" class="w-full flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold rounded-lg bg-custom-500 text-white hover:bg-custom-600 transition-colors shadow-sm mt-2">
                         <i data-lucide="check" class="size-4"></i> Terbitkan Pengumuman
@@ -58,4 +67,15 @@
         </div>
     </form>
 </div>
+
+<script>
+function updateFileName(input, labelId) {
+    const label = document.getElementById(labelId);
+    if (input.files && input.files[0]) {
+        label.textContent = input.files[0].name;
+    } else {
+        label.textContent = 'Pilih foto atau drag & drop di sini';
+    }
+}
+</script>
 @endsection

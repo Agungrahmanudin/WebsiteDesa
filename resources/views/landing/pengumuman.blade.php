@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Pengumuman Resmi - Desa Cimeong')
+@section('title', 'Pengumuman Resmi - ' . ($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 

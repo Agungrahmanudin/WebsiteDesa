@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Hubungi Kami - Desa Cimeong')
+@section('title', 'Hubungi Kami - ' . ($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-chat-dots"></i> Hubungi Kami</span>
         <h1 class="hero-title text-white mt-3">Saluran Komunikasi Desa</h1>
-        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Sampaikan aspirasi, kritik, dan saran untuk pembangunan Desa Cimeong</p>
+        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Sampaikan aspirasi, kritik, dan saran untuk pembangunan {{ $kontakDesa->nama_desa ?? 'Desa' }}</p>
       </div>
     </div>
   </div>
@@ -41,7 +41,7 @@
               </div>
               <div>
                 <h6 class="fw-bold mb-1">Alamat Balai Desa</h6>
-                <p class="text-muted mb-0">{{ $kontak->alamat ?? 'Desa Cimeong, Jawa Barat' }}</p>
+                <p class="text-muted mb-0">{{ $kontak->alamat ?? '' }}</p>
               </div>
             </div>
           </div>
@@ -141,11 +141,11 @@
             <div class="mb-3">
               <label class="form-label fw-semibold">Isi Pesan / Aduan</label>
               <textarea rows="5" class="form-control" 
-                        placeholder="Tuliskan aspirasi, kritik, atau saran untuk kemajuan Desa Cimeong..." required></textarea>
+                        placeholder="Tuliskan aspirasi, kritik, atau saran untuk kemajuan {{ $kontakDesa->nama_desa ?? 'desa' }}..." required></textarea>
             </div>
 
             <button type="button" 
-                    onclick="alert('Terima kasih! Pesan Anda telah diteruskan ke Pemerintah Desa Cimeong.')" 
+                    onclick="alert('Terima kasih! Pesan Anda telah diteruskan ke Pemerintah {{ $kontakDesa->nama_desa ?? 'Desa' }}.')" 
                     class="btn-hw-primary w-100 py-3 justify-content-center">
               <i class="bi bi-send"></i> Kirim Aspirasi
             </button>

@@ -1,10 +1,15 @@
+@php $kontakDesa = \App\Models\Kontak::first(); @endphp
 <meta charset="utf-8">
-<title>@yield('title', 'Admin Panel - Sistem Informasi Desa Cimeong')</title>
+<title>@yield('title', 'Admin Panel - Sistem Informasi ' . ($kontakDesa->nama_desa ?? 'Desa'))</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-<meta content="Panel Administrasi Sistem Informasi Desa Cimeong" name="description">
-<meta content="Desa Cimeong" name="author">
+<meta content="Panel Administrasi Sistem Informasi {{ $kontakDesa->nama_desa ?? 'Desa' }}" name="description">
+<meta content="{{ $kontakDesa->nama_desa ?? 'Desa' }}" name="author">
 <!-- App favicon -->
+@if($kontakDesa && $kontakDesa->logo)
+<link rel="shortcut icon" type="image/png" href="{{ asset('storage/' . $kontakDesa->logo) }}">
+@else
 <link rel="shortcut icon" href="{{ asset('assets_admin/assets/images/favicon.ico') }}">
+@endif
 <!-- Layout config Js -->
 <script src="{{ asset('assets_admin/assets/js/layout.js') }}"></script>
 <!-- StarCode CSS -->

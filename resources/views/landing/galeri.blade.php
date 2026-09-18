@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Galeri Desa - Desa Cimeong')
+@section('title', 'Galeri Desa - ' . ucwords($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-images"></i> Dokumentasi</span>
         <h1 class="hero-title text-white mt-3">Galeri Foto & Video</h1>
-        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Potret kebersamaan masyarakat dan pembangunan Desa Cimeong</p>
+        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Potret kebersamaan masyarakat dan pembangunan {{ ucwords($kontakDesa->nama_desa ?? 'Desa') }}</p>
       </div>
     </div>
   </div>

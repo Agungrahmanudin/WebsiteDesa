@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Berita Desa - Desa Cimeong')
+@section('title', 'Berita Desa - ' . ($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 
@@ -10,8 +10,8 @@
     <div class="row justify-content-center text-center">
       <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-newspaper"></i> Informasi Terkini</span>
-        <h1 class="hero-title text-white mt-3">Berita & Artikel Desa Cimeong</h1>
-        <p class="hero-lead text-white mt-3 opacity-75">Dapatkan informasi terbaru seputar kegiatan, pembangunan, dan perkembangan Desa Cimeong</p>
+        <h1 class="hero-title text-white mt-3">Berita & Artikel {{ $kontakDesa->nama_desa ?? 'Desa' }}</h1>
+        <p class="hero-lead text-white mt-3 opacity-75">Dapatkan informasi terbaru seputar kegiatan, pembangunan, dan perkembangan {{ $kontakDesa->nama_desa ?? 'desa' }}</p>
       </div>
     </div>
   </div>

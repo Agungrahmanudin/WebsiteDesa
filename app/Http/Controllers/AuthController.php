@@ -72,29 +72,42 @@ class AuthController extends Controller
     public function register(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'password' => ['required', 'string', 'min:6'],
+            'role' => ['required', 'in:super_admin,admin,operator,editor,user'],
         ], [
             'name.required' => 'Nama lengkap wajib diisi.',
+            'name.max' => 'Nama lengkap maksimal 100 karakter.',
             'email.required' => 'Alamat email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email maksimal 100 karakter.',
             'email.unique' => 'Email sudah terdaftar, silakan gunakan email lain atau login.',
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 6 karakter.',
-            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'role.required' => 'Role wajib dipilih.',
+            'role.in' => 'Role yang dipilih tidak valid.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'role' => 'user',
+            'role' => $request->role,
+            'avatar' => null,
             'is_active' => 1,
+            'last_login' => null,
         ]);
 
+        // Auto login setelah register
         Auth::login($user);
 
-        return redirect()->route('home')->with('success', 'Pendaftaran berhasil! Selamat datang di Sistem Desa Cimeong.');
+        // Redirect berdasarkan role
+        if (in_array($user->role, ['super_admin', 'admin', 'operator', 'editor'])) {
+            return redirect()->route('admin.dashboard')->with('success', 'Pendaftaran berhasil! Selamat datang di Dashboard Admin, ' . $user->name . '.');
+        }
+
+        return redirect()->route('home')->with('success', 'Pendaftaran berhasil! Selamat datang di Sistem Desa Cimeong, ' . $user->name . '.');
     }
 
     public function logout(Request $request)

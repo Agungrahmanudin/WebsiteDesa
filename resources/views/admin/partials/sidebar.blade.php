@@ -7,7 +7,7 @@
                 <i data-lucide="landmark" class="size-5"></i>
             </div>
             <div class="text-start group-data-[sidebar-size=sm]:hidden">
-                <span class="text-base font-bold tracking-tight text-slate-800 dark:text-zink-50 block leading-tight">DESA CIMEONG</span>
+                <span class="text-base font-bold tracking-tight text-slate-800 dark:text-zink-50 block leading-tight uppercase">{{ $kontakDesa->nama_desa ?? 'DESA BANJARAN' }}</span>
                 <span class="text-[10px] text-slate-500 dark:text-zink-300 block uppercase font-medium">Panel Administrasi</span>
             </div>
         </a>

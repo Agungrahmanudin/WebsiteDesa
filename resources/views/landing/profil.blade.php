@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Profil Desa - Desa Cimeong')
+@section('title', 'Profil Desa - ' . ($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-building"></i> Tentang Kami</span>
         <h1 class="hero-title text-white mt-3">Profil Pemerintah Desa</h1>
-        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Mengenal lebih dekat sejarah, visi, misi, dan struktur organisasi Desa Cimeong</p>
+        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Mengenal lebih dekat sejarah, visi, misi, dan struktur organisasi {{ $kontakDesa->nama_desa ?? 'Desa' }}</p>
       </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
           <h6 class="text-uppercase fw-bold text-primary mb-2" style="font-size: 0.85rem; letter-spacing: 0.05em;">VISI</h6>
           <div class="alert alert-primary mb-4" style="border-left: 4px solid var(--clr-primary);">
             <p class="mb-0 fst-italic fw-semibold">
-              "{{ !empty($kontak->visi) ? $kontak->visi : 'Terwujudnya Desa Cimeong yang Mandiri, Sejahtera, Berakhlak Mulia, dan Transparan Berbasis Potensi Lokal dan Teknologi Informasi.' }}"
+              "{{ !empty($kontak->visi) ? $kontak->visi : 'Terwujudnya ' . ($kontakDesa->nama_desa ?? 'Desa') . ' yang Mandiri, Sejahtera, Berakhlak Mulia, dan Transparan Berbasis Potensi Lokal dan Teknologi Informasi.' }}"
             </p>
           </div>
 
@@ -83,10 +83,10 @@
               {!! nl2br(e($kontak->sejarah)) !!}
             @else
               <p class="mb-3">
-                Desa Cimeong merupakan salah satu desa yang sarat akan kekayaan sejarah dan budaya agraris. Nama Cimeong secara turun-temurun berasal dari kata mata air jernih yang menjadi sumber kehidupan masyarakat petani di kawasan perbukitan sejak dahulu.
+                {{ $kontakDesa->nama_desa ?? 'Desa' }} merupakan salah satu desa yang sarat akan kekayaan sejarah dan budaya agraris. Nama desa ini secara turun-temurun berasal dari mata air jernih yang menjadi sumber kehidupan masyarakat petani di kawasan perbukitan sejak dahulu.
               </p>
               <p>
-                Seiring perkembangan zaman, Desa Cimeong kini terus berbenah menjadi desa modern tanpa melupakan akar tradisi gotong royong warga. Melalui digitalisasi layanan publik, desa ini siap menyongsong era keterbukaan informasi dan kemudahan akses bagi seluruh warganya.
+                Seiring perkembangan zaman, {{ $kontakDesa->nama_desa ?? 'Desa ini' }} kini terus berbenah menjadi desa modern tanpa melupakan akar tradisi gotong royong warga. Melalui digitalisasi layanan publik, desa ini siap menyongsong era keterbukaan informasi dan kemudahan akses bagi seluruh warganya.
               </p>
             @endif
           </div>
@@ -140,7 +140,7 @@
                     <i class="bi bi-geo-alt-fill text-danger mt-1" style="font-size: 1.1rem;"></i>
                     <div>
                       <small class="text-muted d-block mb-1">Alamat</small>
-                      <span class="fw-semibold">{{ $kontak->alamat ?? 'Jl. Raya Desa Cimeong, Kec. Banjaran, Majalengka, Jawa Barat' }}</span>
+                      <span class="fw-semibold">{{ $kontak->alamat ?? '' }}</span>
                     </div>
                   </div>
                 </div>

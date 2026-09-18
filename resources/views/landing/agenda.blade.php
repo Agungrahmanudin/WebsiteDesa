@@ -1,6 +1,6 @@
 @extends('landing.layout.app')
 
-@section('title', 'Agenda Kegiatan - Desa Cimeong')
+@section('title', 'Agenda Kegiatan - ' . ($kontakDesa->nama_desa ?? 'Desa'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
       <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-calendar-event"></i> Kalender Desa</span>
         <h1 class="hero-title text-white mt-3">Jadwal & Agenda Kegiatan</h1>
-        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Ikuti setiap kegiatan dan acara yang diadakan di Desa Cimeong</p>
+        <p class="hero-lead text-white mt-3 opacity-75" style="text-align: center; margin-left: auto; margin-right: auto; max-width: 700px;">Ikuti setiap kegiatan dan acara yang diadakan di {{ $kontakDesa->nama_desa ?? 'Desa' }}</p>
       </div>
     </div>
   </div>

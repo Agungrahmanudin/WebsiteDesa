@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@yield('title', 'Desa Cimeong - Sistem Informasi Desa')</title>
-<meta name="description" content="@yield('description', 'Sistem Informasi dan Pelayanan Publik Desa Cimeong')">
+<title>@yield('title', ($kontakData->nama_desa ?? 'Desa') . ' - Sistem Informasi Desa')</title>
+<meta name="description" content="@yield('description', 'Sistem Informasi dan Pelayanan Publik ' . ($kontakData->nama_desa ?? 'Desa'))">
 
 <!-- Google Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,8 +17,13 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 <!-- AOS -->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+@php $kontakData = \App\Models\Kontak::first(); @endphp
 <link href="{{ asset('landing/assets/style.css') }}" rel="stylesheet" />
+@if($kontakData && $kontakData->logo)
+<link rel="icon" type="image/png" href="{{ asset('storage/' . $kontakData->logo) }}">
+@else
 <link rel="icon" type="image/x-icon" href="{{ asset('landing/assets/hand-heart.png') }}">
+@endif
 
 @stack('styles')
 
@@ -56,8 +61,6 @@
 </head>
 <body>
 
-@php $kontakData = \App\Models\Kontak::first(); @endphp
-
 <!-- PRELOADER -->
 <div id="preloader" aria-hidden="true">
   <div class="preload-ring">
@@ -67,7 +70,7 @@
       <i class="bi bi-building-fill-gear preload-heart" style="color:#fff;font-size:2.1rem;"></i>
     @endif
   </div>
-  <div class="preload-text">{{ strtoupper($kontakData->nama_desa ?? 'DESA CIMEONG') }}&hellip;</div>
+  <div class="preload-text">{{ strtoupper($kontakData->nama_desa ?? 'DESA') }}&hellip;</div>
 </div>
 
 <!-- NAVBAR -->
@@ -80,10 +83,10 @@
         <span class="hw-logo-mark"><i class="bi bi-building-fill-gear"></i></span>
       @endif
       @php
-        $namaDesaFull = $kontakData->nama_desa ?? 'Desa Cimeong';
+        $namaDesaFull = $kontakData->nama_desa ?? 'Desa';
         $parts = explode(' ', $namaDesaFull, 2);
         $namaPrefix = $parts[0] ?? 'Desa';
-        $namaSuffix = $parts[1] ?? 'Cimeong';
+        $namaSuffix = $parts[1] ?? '';
       @endphp
       {{ $namaPrefix }}<span class="dot">{{ $namaSuffix }}</span>
     </a>
@@ -128,21 +131,21 @@
             <span class="hw-logo-mark"><i class="bi bi-building-fill-gear"></i></span>
           @endif
           @php
-            $namaDesaFull2 = $kontakData->nama_desa ?? 'Desa Cimeong';
+            $namaDesaFull2 = $kontakData->nama_desa ?? 'Desa';
             $parts2 = explode(' ', $namaDesaFull2, 2);
           @endphp
-          {{ $parts2[0] ?? 'Desa' }}<span class="dot">{{ $parts2[1] ?? 'Cimeong' }}</span>
+          {{ $parts2[0] ?? 'Desa' }}<span class="dot">{{ $parts2[1] ?? '' }}</span>
         </div>
-        <p class="text-muted">Sistem Informasi dan Pelayanan Publik Digital untuk warga Desa Cimeong yang lebih cepat, transparan, dan modern.</p>
+        <p class="text-muted">Sistem Informasi dan Pelayanan Publik Digital untuk warga {{ $kontakData->nama_desa ?? 'desa' }} yang lebih cepat, transparan, dan modern.</p>
         <div class="d-flex gap-2 mt-3">
-          @if(!empty($kontak->facebook ?? ''))
-            <a href="{{ $kontak->facebook }}" class="footer-social" target="_blank"><i class="bi bi-facebook"></i></a>
+          @if(!empty($kontakData->facebook ?? ''))
+            <a href="{{ $kontakData->facebook }}" class="footer-social" target="_blank"><i class="bi bi-facebook"></i></a>
           @endif
-          @if(!empty($kontak->instagram ?? ''))
-            <a href="{{ $kontak->instagram }}" class="footer-social" target="_blank"><i class="bi bi-instagram"></i></a>
+          @if(!empty($kontakData->instagram ?? ''))
+            <a href="{{ $kontakData->instagram }}" class="footer-social" target="_blank"><i class="bi bi-instagram"></i></a>
           @endif
-          @if(!empty($kontak->youtube ?? ''))
-            <a href="{{ $kontak->youtube }}" class="footer-social" target="_blank"><i class="bi bi-youtube"></i></a>
+          @if(!empty($kontakData->youtube ?? ''))
+            <a href="{{ $kontakData->youtube }}" class="footer-social" target="_blank"><i class="bi bi-youtube"></i></a>
           @endif
         </div>
       </div>
@@ -167,9 +170,9 @@
       <div class="col-lg-4">
         <h6>Kontak Kami</h6>
         <ul class="footer-links">
-          <li><i class="bi bi-geo-alt-fill me-2"></i> {{ $kontak->alamat ?? 'Desa Cimeong, Jawa Barat' }}</li>
-          <li><i class="bi bi-telephone-fill me-2"></i> {{ $kontak->no_telepon ?? '-' }}</li>
-          <li><i class="bi bi-envelope-fill me-2"></i> {{ $kontak->email ?? '-' }}</li>
+          <li><i class="bi bi-geo-alt-fill me-2"></i> {{ $kontakData->alamat ?? 'Alamat desa belum diatur' }}</li>
+          <li><i class="bi bi-telephone-fill me-2"></i> {{ $kontakData->no_telepon ?? '-' }}</li>
+          <li><i class="bi bi-envelope-fill me-2"></i> {{ $kontakData->email ?? '-' }}</li>
         </ul>
       </div>
     </div>
@@ -177,10 +180,10 @@
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-6 text-center text-md-start">
-            © {{ date('Y') }} Desa Cimeong. All rights reserved.
+            © {{ date('Y') }} {{ $kontakData->nama_desa ?? 'Desa' }}. All rights reserved.
           </div>
           <div class="col-md-6 text-center text-md-end">
-            Made with <i class="bi bi-heart-fill text-danger"></i> for Desa Cimeong
+            Made with <i class="bi bi-heart-fill text-danger"></i> for {{ $kontakData->nama_desa ?? 'Desa' }}
           </div>
         </div>
       </div>

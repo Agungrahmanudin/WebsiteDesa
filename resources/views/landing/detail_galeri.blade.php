@@ -1,7 +1,7 @@
 @extends('landing.layout.app')
 
-@section('title', $item->judul . ' - Galeri Desa Cimeong')
-@section('description', $item->keterangan ?: 'Dokumentasi kegiatan dan momen penting di Desa Cimeong')
+@section('title', $item->judul . ' - Galeri ' . ($kontakDesa->nama_desa ?? 'Desa'))
+@section('description', $item->keterangan ?: 'Dokumentasi kegiatan dan momen penting di ' . ($kontakDesa->nama_desa ?? 'desa'))
 
 @section('content')
 

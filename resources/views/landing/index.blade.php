@@ -1,7 +1,7 @@
 @extends('landing.layout.app')
 
-@section('title', 'Beranda - Desa Cimeong')
-@section('description', 'Sistem Informasi dan Pelayanan Publik Desa Cimeong yang transparan dan modern')
+@section('title', 'Beranda - ' . ($kontakDesa->nama_desa ?? 'Desa'))
+@section('description', 'Sistem Informasi dan Pelayanan Publik ' . ($kontakDesa->nama_desa ?? 'Desa') . ' yang transparan dan modern')
 
 @section('content')
 
@@ -16,7 +16,7 @@
       <div class="col-lg-6" data-aos="fade-right">
         <span class="eyebrow"><i class="bi bi-stars"></i> {{ number_format($totalPenduduk) }} Warga Terdaftar</span>
         <h1 class="hero-title mt-4">Layanan Desa <span class="accent-underline">Digital<svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M2 10 Q 50 2 100 8 T 198 6" stroke="#0d6efd" stroke-width="5" fill="none" stroke-linecap="round"/></svg></span> untuk Kemudahan Warga</h1>
-        <p class="hero-lead mt-4">Sistem Informasi Desa Cimeong hadir untuk memberikan layanan administrasi yang lebih cepat, transparan, dan mudah diakses oleh seluruh warga kapan saja, dimana saja.</p>
+        <p class="hero-lead mt-4">Sistem Informasi {{ $kontakDesa->nama_desa ?? 'Desa' }} hadir untuk memberikan layanan administrasi yang lebih cepat, transparan, dan mudah diakses oleh seluruh warga kapan saja, dimana saja.</p>
         <div class="d-flex flex-wrap gap-3 mt-4">
           <a href="{{ route('layanan') }}" class="btn-hw-primary">Ajukan Surat Online <i class="bi bi-arrow-right"></i></a>
           <a href="{{ route('profil') }}" class="btn-hw-outline"><i class="bi bi-info-circle"></i> Tentang Desa</a>
@@ -45,7 +45,7 @@
                 ? asset('storage/' . $kontak->hero_image)
                 : 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=900&h=1000&fit=crop&auto=format';
             @endphp
-            <img src="{{ $heroImg }}" alt="{{ isset($kontak) && $kontak->nama_desa ? $kontak->nama_desa : 'Desa Cimeong' }}" loading="lazy">
+            <img src="{{ $heroImg }}" alt="{{ $kontakDesa->nama_desa ?? 'Desa' }}" loading="lazy">
           </div>
           <div class="float-card float-card-1">
             <span class="fc-icon"><i class="bi bi-newspaper"></i></span>
@@ -166,13 +166,10 @@
 <!-- BERITA TERBARU -->
 <section class="section-pad" id="berita">
   <div class="container">
-    <div class="row justify-content-between align-items-end mb-5">
-      <div class="col-lg-6" data-aos="fade-right">
+    <div class="row justify-content-center text-center mb-4">
+      <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow"><i class="bi bi-newspaper"></i> Informasi Terkini</span>
         <h2 class="section-title mt-3">Berita & Artikel Desa</h2>
-      </div>
-      <div class="col-lg-auto" data-aos="fade-left">
-        <a href="{{ route('berita') }}" class="btn-hw-outline">Lihat Semua Berita <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
     <div class="row g-4">
@@ -198,6 +195,9 @@
           </div>
         </div>
       @endforeach
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="{{ route('berita') }}" class="btn-hw-outline">Lihat Semua Berita <i class="bi bi-arrow-right"></i></a>
     </div>
   </div>
 </section>
@@ -242,14 +242,11 @@
 @if($galeri->count() > 0)
 <section class="section-pad" id="galeri">
   <div class="container">
-    <div class="row justify-content-between align-items-end mb-5">
-      <div class="col-lg-6" data-aos="fade-right">
+    <div class="row justify-content-center text-center mb-4">
+      <div class="col-lg-8" data-aos="fade-up">
         <span class="eyebrow"><i class="bi bi-images"></i> Dokumentasi</span>
         <h2 class="section-title mt-3">Galeri Foto & Video</h2>
-        <p class="section-sub mt-2">Dokumentasi kegiatan dan momen penting di Desa Cimeong</p>
-      </div>
-      <div class="col-lg-auto" data-aos="fade-left">
-        <a href="{{ route('galeri') }}" class="btn-hw-outline">Lihat Semua Galeri <i class="bi bi-arrow-right"></i></a>
+        <p class="section-sub mt-2">Dokumentasi kegiatan dan momen penting di {{ ucwords($kontakDesa->nama_desa ?? 'Desa') }}</p>
       </div>
     </div>
     <div class="row g-4">
@@ -299,6 +296,9 @@
           </div>
         </div>
       @endforeach
+    </div>
+    <div class="text-center mt-5" data-aos="fade-up">
+      <a href="{{ route('galeri') }}" class="btn-hw-outline">Lihat Semua Galeri <i class="bi bi-arrow-right"></i></a>
     </div>
   </div>
 </section>
