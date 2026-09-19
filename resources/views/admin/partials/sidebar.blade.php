@@ -3,9 +3,13 @@
     
     <div class="flex items-center justify-center px-5 text-center h-header">
         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2">
-            <div class="flex items-center justify-center size-9 rounded-lg bg-custom-500 text-white font-bold">
-                <i data-lucide="landmark" class="size-5"></i>
-            </div>
+            @if($kontakDesa && $kontakDesa->logo)
+                <img src="{{ asset('storage/' . $kontakDesa->logo) }}" alt="Logo Desa" class="size-9 rounded-lg object-cover">
+            @else
+                <div class="flex items-center justify-center size-9 rounded-lg bg-custom-500 text-white font-bold">
+                    <i data-lucide="landmark" class="size-5"></i>
+                </div>
+            @endif
             <div class="text-start group-data-[sidebar-size=sm]:hidden">
                 <span class="text-base font-bold tracking-tight text-slate-800 dark:text-zink-50 block leading-tight uppercase">{{ $kontakDesa->nama_desa ?? 'DESA BANJARAN' }}</span>
                 <span class="text-[10px] text-slate-500 dark:text-zink-300 block uppercase font-medium">Panel Administrasi</span>

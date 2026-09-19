@@ -10,7 +10,7 @@
         <div class="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
                 <h4 class="text-xl font-bold mb-1 text-white">Selamat Datang, {{ auth()->user()->name }}! 👋</h4>
-                <p class="text-white/80 text-sm mb-0">Panel informasi dan administrasi pelayanan publik Sistem Informasi Desa Cimeong.</p>
+                <p class="text-white/80 text-sm mb-0">Panel informasi dan administrasi pelayanan publik Sistem Informasi {{ $kontakDesa->nama_desa ?? 'Desa' }}.</p>
             </div>
             <div class="flex items-center gap-2 shrink-0">
                 <a href="{{ route('admin.permohonan.index') }}" class="px-4 py-2 text-xs font-semibold rounded-lg bg-white text-custom-600 hover:bg-slate-100 transition">
